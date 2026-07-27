@@ -1,0 +1,97 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Practice Areas" subtitle="Overview grid + individual-area detail template" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Areas — Namami Law Offices</title>
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/colors.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/typography.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/styles.css">
+<script src="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel" src="PracticeDetail.jsx"></script>
+<script type="text/babel">
+const { useState, useEffect } = React;
+const { Eyebrow } = window.NamamiLawOfficesDesignSystem_f396ce;
+
+function Page() {
+  const { SECTION, H2, PD, Ellipse } = window;
+  const [open, setOpen] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const slug = params.get('area');
+    if (slug) {
+      const area = window.PRACTICE_AREAS.find((a) => a.slug === slug);
+      if (area) setOpen(area);
+    }
+  }, []);
+
+  const jump = (area) => {
+    setOpen(area);
+    history.replaceState(null, '', 'practice.html?area=' + area.slug);
+  };
+  const close = () => {
+    setOpen(null);
+    history.replaceState(null, '', 'practice.html');
+  };
+
+  return (
+    <window.Shell active="practice.html">
+      <section style={{ ...SECTION, background: 'var(--color-charcoal)', color: 'var(--color-cream)',
+        minHeight: '50vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} data-screen-label="Practice Areas — Hero">
+        <Ellipse pos="tr" />
+        <window.MarkWatermark side="right" />
+        <div className="nm-reveal" style={{ position: 'relative', zIndex: 1, maxWidth: 880 }}>
+          <Eyebrow tone="saffron">Practice Areas</Eyebrow>
+          <div className="nm-mask nm-reveal">
+            <h1 style={{ fontSize: 'clamp(2.4rem,5vw,4rem)', fontWeight: 600, letterSpacing: '-.03em',
+              lineHeight: 1.02, margin: '18px 0 0' }}>Where IP law meets creative vision<span style={PD}>.</span></h1>
+          </div>
+          <p style={{ fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.5, color: 'rgba(249,245,239,.72)',
+            maxWidth: '54ch', marginTop: 20 }}>
+            Select an area to read what the work involves, who it's for, and what to expect from us.
+          </p>
+        </div>
+      </section>
+
+      <section style={{ ...SECTION, background: 'var(--color-cream)' }}>
+        <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 22 }}>
+          {window.PRACTICE_AREAS.map((a, i) => (
+            <button className="nm-reveal nm-tile-sweep" key={a.slug} onClick={() => jump(a)} style={{
+              textAlign: 'left', border: '1px solid var(--line-on-light)', borderTop: '3px solid var(--color-charcoal)',
+              borderRadius: 'var(--radius-sm)', padding: '26px 24px', background: 'var(--color-cream)',
+              cursor: 'pointer', font: 'inherit', color: 'inherit',
+            }}>
+              <div className="nm-tile-sweep-bg" />
+              <div style={{ position: 'absolute', top: -6, right: 14, fontSize: '4.2rem', fontWeight: 700,
+                color: 'rgba(28,28,30,.05)', lineHeight: 1, zIndex: 0, pointerEvents: 'none' }}>{String(i + 1).padStart(2, '0')}</div>
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <div className="nm-tile-title" style={{ fontSize: '1.15rem', fontWeight: 600 }}>{a.name}</div>
+                <p className="nm-tile-desc" style={{ fontSize: '.92rem', fontWeight: 300, lineHeight: 1.55, color: '#4a4a4c', margin: '10px 0 14px' }}>{a.oneLiner}</p>
+                <span className="nm-tile-link" style={{ fontSize: '.8rem', fontWeight: 600, color: 'var(--color-gold)' }}>View practice area →</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {open && <window.PracticeDetail area={open} onClose={close} onJump={jump} />}
+    </window.Shell>
+  );
+}
+(function wait(){ if(window.Shell && window.PracticeDetail){ ReactDOM.createRoot(document.getElementById('app')).render(<Page />); } else { setTimeout(wait, 50); } })();
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Insights" subtitle="Filterable knowledge hub — practice, type, vertical, author" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights — Namami Law Offices</title>
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/colors.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/typography.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/styles.css">
+<script src="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  .nm-select{ font-family: var(--font-grotesk); font-size: .86rem; padding: 10px 14px;
+    border: 1px solid var(--line-on-light); border-radius: var(--radius-sm); background: var(--color-cream);
+    color: var(--color-charcoal); cursor: pointer; }
+  .nm-search{ font-family: var(--font-grotesk); font-size: .92rem; padding: 11px 16px;
+    border: 1px solid var(--line-on-light); border-radius: var(--radius-sm); background: var(--color-cream);
+    color: var(--color-charcoal); width: 100%; }
+  .nm-search:focus, .nm-select:focus{ outline: none; border-color: var(--color-saffron); }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+const { Eyebrow, Badge, Button } = window.NamamiLawOfficesDesignSystem_f396ce;
+
+const TYPE_CTA = { Article: 'Read', Podcast: 'Listen', 'Video Explainer': 'Watch', 'Case Study': 'Read', Guide: 'Read' };
+const PRACTICE_NAMES = window.PRACTICE_AREAS.map((a) => a.name);
+
+function fmtDate(d) {
+  return new Date(d).toLocaleDateString('en-IN', { month: 'short', year: 'numeric', day: 'numeric' });
+}
+
+function InsightCard({ item, onOpen, className }) {
+  return (
+    <div className={className} style={{ border: '1px solid var(--line-on-light)', borderTop: '3px solid var(--color-charcoal)',
+      borderRadius: 'var(--radius-sm)', padding: '22px 22px', display: 'flex', flexDirection: 'column',
+      height: '100%', boxSizing: 'border-box' }}>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+        <Badge tone={item.type === 'Podcast' ? 'dark' : 'accent'}>{item.type}</Badge>
+        <span style={{ fontSize: '.72rem', color: 'var(--color-grey)', letterSpacing: '.04em' }}>{fmtDate(item.date)}</span>
+      </div>
+      <div style={{ fontSize: '1.08rem', fontWeight: 600, letterSpacing: '-.01em', margin: '14px 0 0', lineHeight: 1.3 }}>{item.title}</div>
+      <p style={{ fontSize: '.88rem', fontWeight: 300, color: '#4a4a4c', lineHeight: 1.55, margin: '10px 0 14px', flex: 1 }}>{item.desc}</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14 }}>
+        {item.practices.map((p) => (
+          <span key={p} style={{ fontSize: '.72rem', color: 'var(--color-gold)', border: '1px solid var(--line-on-light)',
+            borderRadius: 'var(--radius-pill)', padding: '3px 10px' }}>{p}</span>
+        ))}
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: '.76rem', color: 'var(--color-grey)' }}>{item.author}</span>
+        <button onClick={() => onOpen(item)} style={{ background: 'none', border: 'none', cursor: 'pointer',
+          fontFamily: 'var(--font-grotesk)', fontSize: '.84rem', fontWeight: 600, color: 'var(--color-gold)', padding: 0 }}>
+          {TYPE_CTA[item.type]} →
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ItemDetail({ item, onClose }) {
+  useEffect(() => { document.body.style.overflow = 'hidden'; return () => { document.body.style.overflow = ''; }; }, []);
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', justifyContent: 'flex-end' }}>
+      <div onClick={onClose} style={{ position: 'absolute', inset: 0, background: 'rgba(28,28,30,.6)' }} />
+      <article style={{ position: 'relative', width: 'min(620px,94vw)', height: '100%', overflowY: 'auto',
+        background: 'var(--color-cream)', boxShadow: '-20px 0 60px rgba(28,28,30,.35)', padding: '40px 46px 60px', boxSizing: 'border-box' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Badge tone={item.type === 'Podcast' ? 'dark' : 'accent'}>{item.type}</Badge>
+          <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none',
+            cursor: 'pointer', fontSize: '1.6rem', lineHeight: 1, color: 'var(--color-charcoal)' }}>×</button>
+        </div>
+        <h2 style={{ fontSize: 'clamp(1.7rem,3vw,2.3rem)', fontWeight: 600, letterSpacing: '-.02em', lineHeight: 1.12, margin: '18px 0 0' }}>{item.title}</h2>
+        <div style={{ fontSize: '.8rem', color: 'var(--color-grey)', marginTop: 10 }}>{item.author} · {fmtDate(item.date)} · {item.pillar}</div>
+        <p style={{ fontSize: '1.05rem', fontWeight: 300, lineHeight: 1.6, color: '#3a3a3c', marginTop: 22 }}>{item.desc}</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 22 }}>
+          {item.practices.map((p) => (
+            <a key={p} href={'insights.html?practice=' + encodeURIComponent(p)} style={{ fontSize: '.78rem',
+              color: 'var(--color-gold)', border: '1px solid var(--line-on-light)', borderRadius: 'var(--radius-pill)',
+              padding: '5px 14px', textDecoration: 'none' }}>{p}</a>
+          ))}
+        </div>
+        <p style={{ fontSize: '.8rem', fontStyle: 'italic', color: 'var(--color-grey)', marginTop: 30, lineHeight: 1.6 }}>
+          Informational only; not legal advice.
+        </p>
+      </article>
+    </div>
+  );
+}
+
+function Page() {
+  const { SECTION, H2, PD, Ellipse } = window;
+  const [q, setQ] = useState('');
+  const [practice, setPractice] = useState('');
+  const [type, setType] = useState('');
+  const [vertical, setVertical] = useState('');
+  const [author, setAuthor] = useState('');
+  const [sort, setSort] = useState('latest');
+  const [openItem, setOpenItem] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('practice')) setPractice(params.get('practice'));
+    const itemSlug = params.get('item');
+    if (itemSlug) {
+      const it = window.INSIGHTS.find((i) => i.slug === itemSlug);
+      if (it) setOpenItem(it);
+    }
+  }, []);
+
+  const filtered = useMemo(() => {
+    let list = window.INSIGHTS.filter((i) => {
+      if (practice && !i.practices.includes(practice)) return false;
+      if (type && i.type !== type) return false;
+      if (vertical && !i.verticals.includes(vertical)) return false;
+      if (author && i.author !== author) return false;
+      if (q && !(i.title + i.desc).toLowerCase().includes(q.toLowerCase())) return false;
+      return true;
+    });
+    if (sort === 'latest') list = list.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+    else if (sort === 'read') list = list.slice().sort((a, b) => b.reads - a.reads);
+    else if (sort === 'practice') list = list.slice().sort((a, b) => a.practices[0].localeCompare(b.practices[0]));
+    return list;
+  }, [q, practice, type, vertical, author, sort]);
+
+  return (
+    <window.Shell active="insights.html">
+      <section style={{ ...SECTION, background: 'var(--color-charcoal)', color: 'var(--color-cream)',
+        minHeight: '42vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} data-screen-label="Insights — Hero">
+        <Ellipse pos="tr" />
+        <window.MarkWatermark side="right" />
+        <div className="nm-reveal" style={{ position: 'relative', zIndex: 1, maxWidth: 860 }}>
+          <Eyebrow tone="saffron">Insights</Eyebrow>
+          <div className="nm-mask nm-reveal">
+            <h1 style={{ fontSize: 'clamp(2.2rem,4.6vw,3.6rem)', fontWeight: 600, letterSpacing: '-.03em',
+              lineHeight: 1.04, margin: '18px 0 0' }}>Information first. We position, we don't pitch<span style={PD}>.</span></h1>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ ...SECTION, background: 'var(--color-cream)', paddingTop: 48 }} data-screen-label="Insights — Library">
+        <input className="nm-search" placeholder="Search insights…" value={q} onChange={(e) => setQ(e.target.value)} />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 16 }}>
+          <select className="nm-select" value={practice} onChange={(e) => setPractice(e.target.value)}>
+            <option value="">All Practice Areas</option>
+            {PRACTICE_NAMES.map((p) => <option key={p} value={p}>{p}</option>)}
+          </select>
+          <select className="nm-select" value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="">All Content Types</option>
+            {window.CONTENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+          <select className="nm-select" value={vertical} onChange={(e) => setVertical(e.target.value)}>
+            <option value="">All Client Verticals</option>
+            {window.CLIENT_VERTICALS.map((v) => <option key={v} value={v}>{v}</option>)}
+          </select>
+          <select className="nm-select" value={author} onChange={(e) => setAuthor(e.target.value)}>
+            <option value="">All Authors</option>
+            {window.AUTHORS.map((a) => <option key={a} value={a}>{a}</option>)}
+          </select>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap',
+          gap: 12, marginTop: 26, borderTop: '1px solid var(--line-on-light)', paddingTop: 18 }}>
+          <div style={{ fontSize: '.82rem', color: 'var(--color-grey)' }}>{filtered.length} result{filtered.length === 1 ? '' : 's'}</div>
+          <div style={{ display: 'flex', gap: 4 }}>
+            {[['latest', 'Latest'], ['read', 'Most Read'], ['practice', 'By Practice Area']].map(([k, label]) => (
+              <button key={k} onClick={() => setSort(k)} style={{
+                fontFamily: 'var(--font-grotesk)', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer',
+                border: 'none', borderBottom: sort === k ? '2px solid var(--color-saffron)' : '2px solid transparent',
+                background: 'none', color: sort === k ? 'var(--color-charcoal)' : 'var(--color-grey)', padding: '6px 10px',
+              }}>{label}</button>
+            ))}
+          </div>
+        </div>
+
+        <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 22, marginTop: 28 }}>
+          {filtered.map((item) => <InsightCard className="nm-reveal" key={item.slug} item={item} onOpen={setOpenItem} />)}
+        </div>
+        {filtered.length === 0 && (
+          <p style={{ fontSize: '.96rem', color: 'var(--color-grey)', marginTop: 30 }}>No insights match those filters yet.</p>
+        )}
+      </section>
+
+      {openItem && <ItemDetail item={openItem} onClose={() => setOpenItem(null)} />}
+    </window.Shell>
+  );
+}
+(function wait(){ if(window.Shell){ ReactDOM.createRoot(document.getElementById('app')).render(<Page />); } else { setTimeout(wait, 50); } })();
+</script>
+</body>
+</html>

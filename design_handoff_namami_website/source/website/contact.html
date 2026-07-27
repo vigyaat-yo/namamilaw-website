@@ -1,0 +1,119 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Contact" subtitle="Enquiry form — fixed fields per wireframe" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Namami Law Offices</title>
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/fonts.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/colors.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/typography.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/spacing.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/styles.css">
+<script src="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  .nm-field-select{ font-family: var(--font-grotesk); font-size: .96rem; padding: 0 0 8px; width: 100%;
+    border: none; border-bottom: 1px solid var(--line-on-light); background: transparent; color: var(--color-charcoal); }
+  .nm-field-select:focus{ outline: none; border-color: var(--color-saffron); }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+const { Eyebrow, Input, Button } = window.NamamiLawOfficesDesignSystem_f396ce;
+
+const HELP_OPTIONS = [
+  'IP Triage Consult', 'Trademark clearance / filing', 'Copyright or media matter',
+  'Patent or design filing', 'Enforcement / infringement', 'Strategic advisory / M&A diligence',
+  'Employment & labour matter', 'Something else',
+];
+
+function Page() {
+  const { SECTION, H2, PD, Ellipse } = window;
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', help: HELP_OPTIONS[0], details: '' });
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
+  const submit = (e) => {
+    e.preventDefault();
+    sessionStorage.setItem('nm-last-enquiry', JSON.stringify(form));
+    window.nmGo('thank-you.html');
+  };
+
+  return (
+    <window.Shell active="contact.html">
+      <section style={{ ...SECTION, background: 'var(--color-cream)' }} data-screen-label="Contact">
+        <Ellipse pos="tr" />
+        <window.MarkWatermark side="right" />
+        <div className="nm-reveal-group" style={{ position: 'relative', zIndex: 1, display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 'clamp(2rem,5vw,5rem)', alignItems: 'start' }}>
+          <div className="nm-reveal">
+            <Eyebrow>Contact</Eyebrow>
+            <div className="nm-mask nm-reveal"><h1 style={H2}>Let's protect what you're building<span style={PD}>.</span></h1></div>
+            <p style={{ fontSize: '1.05rem', fontWeight: 300, lineHeight: 1.6, color: '#3a3a3c',
+              maxWidth: '42ch', marginTop: 22 }}>
+              Start with a 30-minute IP Triage Consult. Or reach out directly — we respond within one
+              business day.
+            </p>
+
+            <div style={{ marginTop: 40, fontSize: '.92rem', fontWeight: 300, color: '#3a3a3c', lineHeight: 1.9 }}>
+              <div style={{ fontSize: '.66rem', letterSpacing: '.2em', textTransform: 'uppercase',
+                fontWeight: 600, color: 'var(--color-gold)', marginBottom: 8 }}>Office</div>
+              S 210, Atlantic Plaza, Mayur Vihar,<br />New Delhi 110091
+              <div style={{ fontSize: '.66rem', letterSpacing: '.2em', textTransform: 'uppercase',
+                fontWeight: 600, color: 'var(--color-gold)', margin: '18px 0 8px' }}>Email</div>
+              <a href="mailto:contact@namamilaw.com" style={{ color: 'var(--color-charcoal)', textDecoration: 'none' }}>contact@namamilaw.com</a>
+              <div style={{ fontSize: '.66rem', letterSpacing: '.2em', textTransform: 'uppercase',
+                fontWeight: 600, color: 'var(--color-gold)', margin: '18px 0 8px' }}>Website</div>
+              www.namamilaw.com
+              <div style={{ fontSize: '.66rem', letterSpacing: '.2em', textTransform: 'uppercase',
+                fontWeight: 600, color: 'var(--color-gold)', margin: '18px 0 8px' }}>Social</div>
+              LinkedIn · Instagram
+            </div>
+
+            <p style={{ fontSize: '.82rem', fontWeight: 300, color: 'var(--color-grey)', fontStyle: 'italic',
+              marginTop: 30, maxWidth: '46ch', lineHeight: 1.6 }}>
+              This material is for general information only and does not constitute advertisement,
+              solicitation, or legal advice.
+            </p>
+          </div>
+
+          <form onSubmit={submit} className="nm-reveal" style={{ display: 'flex', flexDirection: 'column', gap: 22, maxWidth: 440 }}>
+            <Input label="Name" required value={form.name} onChange={set('name')} placeholder="Jane Creator" />
+            <Input label="Company / Brand" value={form.company} onChange={set('company')} placeholder="Studio Nine" />
+            <Input label="Email" type="email" required value={form.email} onChange={set('email')} placeholder="you@studio.com" />
+            <Input label="Phone" type="tel" value={form.phone} onChange={set('phone')} placeholder="+91 98xxxxxxxx" />
+            <div>
+              <div style={{ fontSize: '.72rem', letterSpacing: '.1em', textTransform: 'uppercase',
+                fontWeight: 600, color: 'var(--color-grey)', marginBottom: 8 }}>What do you need help with?</div>
+              <select className="nm-field-select" value={form.help} onChange={set('help')}>
+                {HELP_OPTIONS.map((h) => <option key={h} value={h}>{h}</option>)}
+              </select>
+            </div>
+            <div>
+              <div style={{ fontSize: '.72rem', letterSpacing: '.1em', textTransform: 'uppercase',
+                fontWeight: 600, color: 'var(--color-grey)', marginBottom: 8 }}>A few details (optional)</div>
+              <textarea value={form.details} onChange={set('details')} rows={3} placeholder="Brief context for the consult"
+                style={{ width: '100%', fontFamily: 'var(--font-grotesk)', fontSize: '.96rem', padding: '10px 0',
+                  border: 'none', borderBottom: '1px solid var(--line-on-light)', background: 'transparent',
+                  color: 'var(--color-charcoal)', resize: 'vertical', boxSizing: 'border-box' }} />
+            </div>
+            <div style={{ marginTop: 6 }}>
+              <Button variant="accent" type="submit">Send enquiry</Button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </window.Shell>
+  );
+}
+(function wait(){ if(window.Shell){ ReactDOM.createRoot(document.getElementById('app')).render(<Page />); } else { setTimeout(wait, 50); } })();
+</script>
+</body>
+</html>

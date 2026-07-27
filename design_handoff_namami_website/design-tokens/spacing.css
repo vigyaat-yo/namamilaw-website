@@ -1,0 +1,36 @@
+:root {
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Layout */
+  --sidebar-width: 320px;       /* fixed charcoal nav on web */
+  --page-pad-x: 8vw;
+  --page-pad-y: 7vh;
+  --measure: 44ch;              /* body copy max width */
+
+  /* Radius — editorial but softened; corners are gently rounded. */
+  --radius-none: 0px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-top-accent: 3px;     /* bold charcoal top edge on cards */
+
+  /* Shadows — used sparingly; the mark gets a warm saffron glow. */
+  --shadow-mark: 0 14px 40px rgba(239,137,34,.25);
+  --shadow-soft: 0 2px 10px rgba(28,28,30,.06);
+
+  /* Signature gradient ellipse */
+  --ellipse-glow: radial-gradient(closest-side, rgba(239,137,34,.16), rgba(239,137,34,0)); /* @kind other */
+}

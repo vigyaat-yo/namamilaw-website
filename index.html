@@ -1,0 +1,239 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Home" subtitle="Namami Law Offices — hero, positioning, practice grid" -->
+<!-- @startingPoint section="Website" subtitle="Full multipage Namami Law marketing site" viewport="1440x900" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Namami Law Offices — Strategy. Precision. Trust.</title>
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/colors.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/typography.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/styles.css">
+<script src="_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel">
+const { Eyebrow, Button, Card } = window.NamamiLawOfficesDesignSystem_f396ce;
+
+function Hero() {
+  return (
+    <section style={{ ...window.SECTION, background: 'var(--color-charcoal)', color: 'var(--color-cream)',
+      minHeight: '92vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} data-screen-label="Home — Hero">
+      <window.Ellipse pos="tr" />
+      <window.MarkWatermark side="right" />
+      <div className="nm-reveal" style={{ position: 'relative', zIndex: 1, maxWidth: 960 }}>
+        <Eyebrow tone="saffron">Namami Law Offices · IP &amp; Entertainment</Eyebrow>
+        <div className="nm-mask nm-reveal">
+          <h1 style={{ fontSize: 'clamp(2.8rem,6.4vw,5.6rem)', fontWeight: 600, letterSpacing: '-.03em',
+            lineHeight: .98, margin: '22px 0 0' }}>
+            Strategy. Precision.<br />Trust<span style={window.PD}>.</span>
+          </h1>
+        </div>
+        <p style={{ fontSize: 'clamp(1.05rem,1.5vw,1.4rem)', fontWeight: 300, lineHeight: 1.5,
+          maxWidth: '46ch', color: 'rgba(249,245,239,.72)', marginTop: 26 }}>
+          A boutique IP and media law firm for founders, creators, and brands building something
+          that matters.
+        </p>
+        <div style={{ display: 'flex', gap: 14, marginTop: 36, flexWrap: 'wrap' }}>
+          <window.Magnetic><Button variant="accent" onClick={() => window.nmGo('contact.html')}>Book an IP Triage Consult →</Button></window.Magnetic>
+          <window.Magnetic><Button variant="ghost-inverse" onClick={() => window.nmGo('practice.html')}>Explore Practice Areas</Button></window.Magnetic>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Positioning() {
+  const cols = [
+    ['IP-First Thinking', 'We don\u2019t just file — we build protection strategies that serve your business goals.'],
+    ['Creative Industries Focus', 'Founders, creators, studios, brands. We speak your language.'],
+    ['Full Lifecycle Coverage', 'From brand clearance to global portfolio management. With you at every stage.'],
+  ];
+  return (
+    <section style={{ ...window.SECTION, background: 'var(--color-cream)', paddingTop: 64, paddingBottom: 64 }}>
+      <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 30 }}>
+        {cols.map(([h, s]) => (
+          <div className="nm-reveal" key={h}>
+            <div style={{ height: 2, width: 48, background: 'var(--color-gold)', marginBottom: 18 }} />
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, letterSpacing: '-.02em', margin: 0 }}>{h}</h3>
+            <p style={{ fontSize: '.98rem', fontWeight: 300, lineHeight: 1.6, color: '#3a3a3c', marginTop: 10 }}>{s}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PracticeScroller() {
+  const wrapRef = React.useRef(null);
+  const [idx, setIdx] = React.useState(0);
+  const areas = window.PRACTICE_AREAS;
+  const n = areas.length;
+
+  React.useEffect(() => {
+    let raf = null;
+    const compute = () => {
+      raf = null;
+      const el = wrapRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const total = el.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      const progress = total > 0 ? scrolled / total : 0;
+      setIdx(Math.min(n - 1, Math.floor(progress * n)));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(compute); };
+    compute();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <section ref={wrapRef} style={{ position: 'relative', height: (n * 82) + 'vh' }} data-screen-label="Home — Practice Chapters">
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
+        background: 'var(--color-charcoal)', color: 'var(--color-cream)',
+        display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 7vw', boxSizing: 'border-box' }}>
+        <window.Ellipse pos="br" />
+        <window.MarkWatermark side="right" />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <Eyebrow tone="saffron">What We Do</Eyebrow>
+          <div style={{ position: 'relative', height: 'clamp(300px,38vh,380px)', marginTop: 18 }}>
+            {areas.map((a, i) => (
+              <div key={a.slug} style={{
+                position: 'absolute', inset: '0 0 auto 0',
+                opacity: i === idx ? 1 : 0,
+                transform: i === idx ? 'translateY(0)' : 'translateY(26px)',
+                transition: 'opacity .5s ease, transform .5s ease',
+                pointerEvents: i === idx ? 'auto' : 'none',
+              }}>
+                <h3 style={{ fontSize: 'clamp(2.2rem,5vw,4.2rem)', fontWeight: 600, letterSpacing: '-.03em',
+                  lineHeight: 1.02, margin: 0, maxWidth: '18ch' }}>{a.name}<span style={window.PD}>.</span></h3>
+                <p style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', fontWeight: 300, lineHeight: 1.5,
+                  maxWidth: '52ch', color: 'rgba(249,245,239,.72)', marginTop: 20 }}>{a.oneLiner}</p>
+                <div style={{ marginTop: 22 }}>
+                  <a href={'practice.html?area=' + a.slug} style={{ fontSize: '.92rem', fontWeight: 600,
+                    color: 'var(--color-saffron)', textDecoration: 'none' }}>Learn more →</a>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 6, marginTop: 28, maxWidth: 640 }}>
+            {areas.map((a, i) => (
+              <div key={a.slug} style={{ height: 3, flex: 1, borderRadius: 2,
+                background: i <= idx ? 'var(--color-saffron)' : 'rgba(249,245,239,.18)', transition: 'background .3s' }} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Industries() {
+  return (
+    <section style={{ ...window.SECTION, background: 'var(--color-cream)', paddingTop: 64, paddingBottom: 64 }}>
+      <Eyebrow>Who We Work With</Eyebrow>
+      <div className="nm-reveal-group nm-hscroll" style={{ marginTop: 22 }}>
+        {window.INDUSTRIES.map((i) => (
+          <span className="nm-reveal" key={i} style={{ border: '1px solid var(--line-on-light)', borderRadius: 'var(--radius-pill)',
+            padding: '9px 18px', fontSize: '.88rem', fontWeight: 400, color: 'var(--color-charcoal)', whiteSpace: 'nowrap' }}>{i}</span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function WhyUs() {
+  return (
+    <section style={{ ...window.SECTION, background: 'var(--color-stone)' }}>
+      <Eyebrow>Why Namami Law</Eyebrow>
+      <div className="nm-mask nm-reveal"><h2 style={window.H2}>Authority is shown, not announced<span style={window.PD}>.</span></h2></div>
+      <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 22, marginTop: 44 }}>
+        {window.WHY_NAMAMI.map(([t, d], i) => (
+          <div className="nm-reveal" key={t} style={{ display: 'flex', gap: 18 }}>
+            <div style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--color-saffron)', fontFeatureSettings: '"tnum"' }}>0{i + 1}</div>
+            <div>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 600, letterSpacing: '-.015em', margin: 0 }}>{t}</h3>
+              <p style={{ fontSize: '.94rem', fontWeight: 300, lineHeight: 1.6, color: '#3a3a3c', marginTop: 8 }}>{d}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Voices() {
+  return (
+    <section style={{ ...window.SECTION, background: 'var(--color-cream)' }}>
+      <Eyebrow>In Their Words</Eyebrow>
+      <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24, marginTop: 36 }}>
+        {window.TESTIMONIALS.map(([q, a]) => (
+          <figure className="nm-reveal" key={a} style={{ margin: 0, borderTop: '2px solid var(--color-gold)', paddingTop: 20 }}>
+            <blockquote style={{ margin: 0, fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.4,
+              letterSpacing: '-.01em', color: 'var(--color-charcoal)' }}>“{q}”</blockquote>
+            <figcaption style={{ marginTop: 16, fontSize: '.74rem', letterSpacing: '.14em',
+              textTransform: 'uppercase', color: 'var(--color-grey)', fontWeight: 600 }}>{a}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p style={{ fontSize: '.74rem', fontStyle: 'italic', color: 'var(--color-grey)', marginTop: 24 }}>
+        Shared with consent; not a statement of guaranteed outcomes.
+      </p>
+    </section>
+  );
+}
+
+function CTABand() {
+  return (
+    <section style={{ ...window.SECTION, background: 'var(--color-charcoal)', color: 'var(--color-cream)' }}>
+      <window.Ellipse pos="bl" />
+      <window.MarkWatermark side="left" />
+      <div className="nm-reveal" style={{ position: 'relative', zIndex: 1, maxWidth: 760 }}>
+        <div className="nm-mask nm-reveal">
+          <h2 style={{ fontSize: 'clamp(1.9rem,3.4vw,3rem)', fontWeight: 600, letterSpacing: '-.025em',
+            lineHeight: 1.08, margin: 0 }}>The best IP strategies aren't reactive — they're proactive<span style={window.PD}>.</span></h2>
+        </div>
+        <p style={{ fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.5, color: 'rgba(249,245,239,.72)', marginTop: 18, maxWidth: '46ch' }}>
+          Schedule a 30-minute IP Triage Consult. Walk away with clarity on your risks and priorities.
+        </p>
+        <div style={{ marginTop: 28 }}>
+          <window.Magnetic><Button variant="accent" onClick={() => window.nmGo('contact.html')}>Book your consult →</Button></window.Magnetic>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomePage() {
+  return (
+    <window.Shell active="index.html">
+      <Hero />
+      <Positioning />
+      <PracticeScroller />
+      <Industries />
+      <WhyUs />
+      <Voices />
+      <CTABand />
+    </window.Shell>
+  );
+}
+
+(function wait(){ if(window.Shell){ ReactDOM.createRoot(document.getElementById('app')).render(<HomePage />); } else { setTimeout(wait, 50); } })();
+</script>
+</body>
+</html>

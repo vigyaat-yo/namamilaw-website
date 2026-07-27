@@ -1,0 +1,113 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="The Firm" subtitle="About — philosophy, vision, values" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Firm — Namami Law Offices</title>
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/fonts.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/colors.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/typography.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/tokens/spacing.css">
+<link rel="stylesheet" href="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/styles.css">
+<script src="../_ds/namami-law-offices-design-system-f396ce03-b7ed-4154-bc1d-77ea8ff6edbb/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel">
+const { Eyebrow, Button } = window.NamamiLawOfficesDesignSystem_f396ce;
+
+const VALUES = [
+  ['Strategic Expertise', 'IP read through the lens of your business — not filing for its own sake, but protection that compounds into value.'],
+  ['Meticulous Protection', 'Precise, thorough, exact. The detail is the work; nothing left to assumption.'],
+  ['Visionary Guardianship', 'We guard what you build today with an eye on where it goes next — across formats, markets and borders.'],
+];
+
+function Page() {
+  const { SECTION, H2, PD, Ellipse } = window;
+  return (
+    <window.Shell active="about.html">
+      <section style={{ ...SECTION, background: 'var(--color-charcoal)', color: 'var(--color-cream)',
+        minHeight: '64vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} data-screen-label="The Firm — Hero">
+        <Ellipse pos="tr" />
+        <window.MarkWatermark side="right" />
+        <div className="nm-reveal" style={{ position: 'relative', zIndex: 1, maxWidth: 900 }}>
+          <Eyebrow tone="saffron">The Firm</Eyebrow>
+          <div className="nm-mask nm-reveal">
+            <h1 style={{ fontSize: 'clamp(2.6rem,5.4vw,4.6rem)', fontWeight: 600, letterSpacing: '-.03em',
+              lineHeight: 1, margin: '20px 0 0' }}>A new generation of IP counsel<span style={PD}>.</span></h1>
+          </div>
+          <p style={{ fontSize: 'clamp(1.05rem,1.5vw,1.35rem)', fontWeight: 300, lineHeight: 1.5,
+            maxWidth: '48ch', color: 'rgba(249,245,239,.72)', marginTop: 24 }}>
+            Namami Law Offices is a boutique intellectual-property and media practice built for the people who
+            make things — founders, creators, studios and brands — and for the work they put into the world.
+          </p>
+        </div>
+      </section>
+
+      <section style={{ ...SECTION, background: 'var(--color-cream)' }}>
+        <div className="nm-reveal" style={{ display: 'grid', gridTemplateColumns: '.85fr 1.15fr', gap: 'clamp(2rem,5vw,5rem)', alignItems: 'center' }}>
+          <img src="../assets/mark-saffron.png" alt="Namami mark"
+            style={{ width: 'min(240px,60%)', justifySelf: 'center', filter: 'drop-shadow(0 14px 40px rgba(239,137,34,.25))' }} />
+          <div>
+            <Eyebrow>Philosophy</Eyebrow>
+            <h2 style={H2}>We bow to the work<span style={PD}>.</span></h2>
+            <div style={{ height: 2, width: 64, background: 'var(--color-gold)', margin: '24px 0' }} />
+            <p style={{ fontSize: '1.02rem', fontWeight: 300, lineHeight: 1.62, color: '#3a3a3c', maxWidth: '48ch' }}>
+              <b>Namami</b> (नमामि) is Sanskrit — “I bow,” “I revere.” The mark draws the Anjali mudra, palms
+              joined in greeting, as a single unbroken line that also reads as a lotus. A circle symbolises
+              continuity — the argument, in one gesture, that protecting what people create is an act of
+              reverence for the work itself.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ ...SECTION, background: 'var(--color-stone)' }}>
+        <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 40 }}>
+          <div className="nm-reveal">
+            <Eyebrow>Vision</Eyebrow>
+            <p style={{ fontSize: '1.3rem', fontWeight: 300, lineHeight: 1.4, letterSpacing: '-.01em', color: 'var(--color-charcoal)', marginTop: 16 }}>
+              To be the practice India's creators and innovators turn to first — where rigorous IP law meets a
+              genuine fluency in how creative businesses are built.
+            </p>
+          </div>
+          <div className="nm-reveal">
+            <Eyebrow>Mission</Eyebrow>
+            <p style={{ fontSize: '1.3rem', fontWeight: 300, lineHeight: 1.4, letterSpacing: '-.01em', color: 'var(--color-charcoal)', marginTop: 16 }}>
+              To protect creative and inventive work with precision and care, and to make world-class IP counsel
+              accessible, transparent, and genuinely strategic.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ ...SECTION, background: 'var(--color-cream)' }}>
+        <Eyebrow>Values</Eyebrow>
+        <h2 style={H2}>Three commitments<span style={PD}>.</span></h2>
+        <div className="nm-reveal-group" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 22, marginTop: 44 }}>
+          {VALUES.map(([t, d]) => (
+            <div className="nm-reveal" key={t} style={{ border: '1px solid var(--line-on-light)', borderTop: '3px solid var(--color-charcoal)',
+              borderRadius: 'var(--radius-sm)', padding: '26px 24px' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: 0 }}>{t}</h3>
+              <p style={{ fontSize: '.94rem', fontWeight: 300, lineHeight: 1.6, color: '#4a4a4c', marginTop: 12 }}>{d}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 44 }}>
+          <window.Magnetic><Button variant="accent" onClick={() => window.nmGo('contact.html')}>Book a Consult →</Button></window.Magnetic>
+        </div>
+      </section>
+    </window.Shell>
+  );
+}
+(function wait(){ if(window.Shell){ ReactDOM.createRoot(document.getElementById('app')).render(<Page />); } else { setTimeout(wait, 50); } })();
+</script>
+</body>
+</html>

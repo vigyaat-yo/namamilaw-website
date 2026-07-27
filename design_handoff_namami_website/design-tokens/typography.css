@@ -1,0 +1,31 @@
+:root {
+  /* Families — single neutral grotesk carries the whole identity. */
+  --font-grotesk: 'Hanken Grotesk', 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: var(--font-grotesk);
+
+  /* Weights */
+  --weight-light:    300;  /* body / lede */
+  --weight-regular:  400;
+  --weight-medium:   500;  /* subheads */
+  --weight-semibold: 600;  /* headlines, eyebrows */
+
+  /* Display scale (clamped, tight tracking at large sizes) */
+  --type-display:  clamp(2.6rem, 7vw, 6.2rem);
+  --type-h1:       clamp(2rem, 4.6vw, 3.8rem);
+  --type-h2:       clamp(1.8rem, 3.4vw, 2.8rem);
+  --type-subhead:  1.35rem;
+  --type-lede:     clamp(1.05rem, 1.6vw, 1.4rem);
+  --type-body:     1.02rem;
+  --type-small:    0.93rem;
+  --type-eyebrow:  0.72rem;
+
+  /* Tracking */
+  --track-display: -0.03em;
+  --track-head:    -0.025em;
+  --track-eyebrow:  0.34em;
+
+  /* Line height */
+  --leading-display: 0.98;
+  --leading-head:    1.02;
+  --leading-body:    1.62;
+}

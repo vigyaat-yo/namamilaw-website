@@ -1,0 +1,6 @@
+/* Namami uses Neue Haas Grotesk Display Pro (licensed) as its exclusive typeface.
+   That font is not freely redistributable, so this system ships Hanken Grotesk —
+   the nearest free neo-grotesk match — via Google Fonts. Swap in the licensed
+   Neue Haas webfonts when available by replacing the @import below and the
+   --font-grotesk value in typography.css. */
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap');

@@ -1,0 +1,95 @@
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;}
+body{font-family:var(--font-grotesk);background:var(--color-cream);color:var(--color-charcoal);-webkit-font-smoothing:antialiased;position:relative;}
+a{color:inherit;}
+::selection{background:var(--color-saffron);color:var(--color-charcoal);}
+button{font-family:var(--font-grotesk);}
+
+/* Fine paper-grain texture — tactile, not a gradient; sits over every surface at low opacity. */
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:1000; pointer-events:none;
+  opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar{ width:11px; height:11px; }
+::-webkit-scrollbar-track{ background:var(--color-cream); }
+::-webkit-scrollbar-thumb{ background:var(--color-charcoal); border-radius:10px; border:3px solid var(--color-cream); }
+
+/* Scroll-triggered reveal — gentle fade + rise, matches the brand's restrained motion spec. */
+.nm-reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s cubic-bezier(.22,.7,.2,1), transform .9s cubic-bezier(.22,.7,.2,1); }
+.nm-reveal.nm-in{ opacity:1; transform:none; }
+.nm-reveal-group > *:nth-child(1){ transition-delay:0ms; }
+.nm-reveal-group > *:nth-child(2){ transition-delay:70ms; }
+.nm-reveal-group > *:nth-child(3){ transition-delay:140ms; }
+.nm-reveal-group > *:nth-child(4){ transition-delay:210ms; }
+.nm-reveal-group > *:nth-child(5){ transition-delay:280ms; }
+.nm-reveal-group > *:nth-child(6){ transition-delay:350ms; }
+.nm-reveal-group > *:nth-child(7){ transition-delay:420ms; }
+.nm-reveal-group > *:nth-child(8){ transition-delay:490ms; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .nm-reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+}
+
+/* Mask/wipe headline reveal — child text slides up into view inside an overflow-hidden frame. */
+.nm-mask{ overflow:hidden; display:block; }
+.nm-mask > *{ display:block; transform:translateY(112%); transition:transform 1.05s cubic-bezier(.16,1,.3,1); }
+.nm-mask.nm-in > *{ transform:translateY(0); }
+.nm-mask.nm-reveal{ opacity:1; transform:none; }
+
+/* Horizontal drag-scroll strip with soft edge fades. */
+.nm-hscroll{
+  display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x proximity; padding:2px 2px 10px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 48px),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 48px),transparent);
+}
+.nm-hscroll > *{ flex:none; scroll-snap-align:start; }
+.nm-hscroll::-webkit-scrollbar{ height:5px; }
+
+/* Tile hover sweep — a charcoal fill rises behind the card on hover; text flips to cream. Restrained
+   nod to "liquid fill" button interactions, kept to our own palette. */
+.nm-tile-sweep{ position: relative; overflow: hidden; }
+.nm-tile-sweep-bg{
+  position: absolute; inset: 0; background: var(--color-charcoal); z-index: 0;
+  transform: translateY(101%); transition: transform .48s cubic-bezier(.65,0,.35,1);
+}
+.nm-tile-sweep:hover .nm-tile-sweep-bg{ transform: translateY(0); }
+.nm-tile-sweep:hover .nm-tile-title{ color: var(--color-cream) !important; }
+.nm-tile-sweep:hover .nm-tile-desc{ color: rgba(249,245,239,.75) !important; }
+.nm-tile-sweep:hover .nm-tile-link{ color: var(--color-saffron) !important; }
+
+/* Custom cursor */
+.nm-cursor{
+  position:fixed; top:0; left:0; width:14px; height:14px; border-radius:50%;
+  background:var(--color-cream); pointer-events:none; z-index:2500;
+  mix-blend-mode:difference; will-change:transform; transition:transform .06s linear;
+}
+.nm-has-cursor, .nm-has-cursor a, .nm-has-cursor button{ cursor:none; }
+.nm-has-cursor input, .nm-has-cursor textarea, .nm-has-cursor select{ cursor:auto; }
+
+/* Page-transition curtain */
+.nm-curtain{
+  position:fixed; inset:0; z-index:3000; background:var(--color-charcoal);
+  pointer-events:none; transform:scaleY(1); transform-origin:bottom;
+}
+.nm-curtain.nm-open{ transform:scaleY(0); transform-origin:top; transition:transform .8s cubic-bezier(.76,0,.24,1); }
+.nm-curtain.nm-closing{ transform:scaleY(1); transform-origin:bottom; transition:transform .6s cubic-bezier(.76,0,.24,1); pointer-events:all; }
+
+.nm-mobile-bar{
+  display:none;
+  position:sticky; top:0; z-index:30;
+  height:52px; padding:0 20px;
+  background:var(--color-charcoal);
+  align-items:center; justify-content:space-between;
+}
+
+@media (max-width: 880px){
+  .nm-sidebar{ display:none !important; }
+  .nm-mobile-bar{ display:flex; }
+}
+@media (min-width: 881px){
+  .nm-mobile-drawer{ display:none !important; }
+}

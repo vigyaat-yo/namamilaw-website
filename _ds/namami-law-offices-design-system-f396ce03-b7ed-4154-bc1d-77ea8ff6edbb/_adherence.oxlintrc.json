@@ -1,0 +1,262 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/core/**",
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Hanken Grotesk))/i]",
+        "message": "Font not provided by the design system. Available: Hanken Grotesk."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: children, tone."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:accent|neutral|dark)$/]",
+        "message": "<Badge> tone must be one of 'accent' | 'neutral' | 'dark'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|size|disabled|onClick|type|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, size, disabled, onClick, type."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|accent|ghost|ghost-inverse|link)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'accent' | 'ghost' | 'ghost-inverse' | 'link'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='type'] > Literal[value!=/^(?:button|submit|reset)$/]",
+        "message": "<Button> type must be one of 'button' | 'submit' | 'reset'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|children|inverse|accentTop|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: title, children, inverse, accentTop."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Eyebrow'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|as|key|ref|className|style|children)$/]",
+        "message": "<Eyebrow> doesn't accept that prop. Declared props: children, tone, as."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Eyebrow'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:gold|saffron)$/]",
+        "message": "<Eyebrow> tone must be one of 'gold' | 'saffron'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Input'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|inverse|key|ref|className|style|children)$/]",
+        "message": "<Input> doesn't accept that prop. Declared props: label, inverse."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tag'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|inverse|key|ref|className|style|children)$/]",
+        "message": "<Tag> doesn't accept that prop. Declared props: children, inverse."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "Eyebrow": {
+        "replaces": []
+      },
+      "Input": {
+        "replaces": []
+      },
+      "Tag": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent",
+      "--accent-deep",
+      "--border",
+      "--border-inverse",
+      "--border-top-accent",
+      "--border-width",
+      "--color-charcoal",
+      "--color-cream",
+      "--color-gold",
+      "--color-grey",
+      "--color-offblack",
+      "--color-saffron",
+      "--color-saffron-08",
+      "--color-saffron-16",
+      "--color-stone",
+      "--ellipse-glow",
+      "--font-grotesk",
+      "--font-sans",
+      "--ink-muted-dark",
+      "--ink-muted-light",
+      "--leading-body",
+      "--leading-display",
+      "--leading-head",
+      "--line-on-dark",
+      "--line-on-light",
+      "--measure",
+      "--page-pad-x",
+      "--page-pad-y",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-none",
+      "--radius-pill",
+      "--radius-sm",
+      "--shadow-mark",
+      "--shadow-soft",
+      "--sidebar-width",
+      "--space-1",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--surface-card",
+      "--surface-inverse",
+      "--surface-page",
+      "--surface-secondary",
+      "--text-body",
+      "--text-muted",
+      "--text-on-inverse",
+      "--text-strong",
+      "--track-display",
+      "--track-eyebrow",
+      "--track-head",
+      "--type-body",
+      "--type-display",
+      "--type-eyebrow",
+      "--type-h1",
+      "--type-h2",
+      "--type-lede",
+      "--type-small",
+      "--type-subhead",
+      "--weight-light",
+      "--weight-medium",
+      "--weight-regular",
+      "--weight-semibold"
+    ],
+    "tokenKinds": {
+      "--color-charcoal": "color",
+      "--color-offblack": "color",
+      "--color-saffron": "color",
+      "--color-gold": "color",
+      "--color-cream": "color",
+      "--color-stone": "color",
+      "--color-grey": "color",
+      "--color-saffron-08": "color",
+      "--color-saffron-16": "color",
+      "--line-on-light": "color",
+      "--line-on-dark": "color",
+      "--ink-muted-light": "color",
+      "--ink-muted-dark": "color",
+      "--surface-page": "color",
+      "--surface-secondary": "color",
+      "--surface-inverse": "color",
+      "--surface-card": "color",
+      "--text-strong": "font",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-on-inverse": "font",
+      "--accent": "color",
+      "--accent-deep": "color",
+      "--border": "color",
+      "--border-inverse": "color",
+      "--font-grotesk": "font",
+      "--font-sans": "font",
+      "--weight-light": "font",
+      "--weight-regular": "font",
+      "--weight-medium": "font",
+      "--weight-semibold": "font",
+      "--type-display": "font",
+      "--type-h1": "font",
+      "--type-h2": "font",
+      "--type-subhead": "font",
+      "--type-lede": "font",
+      "--type-body": "font",
+      "--type-small": "font",
+      "--type-eyebrow": "font",
+      "--track-display": "spacing",
+      "--track-head": "spacing",
+      "--track-eyebrow": "spacing",
+      "--leading-display": "font",
+      "--leading-head": "font",
+      "--leading-body": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--sidebar-width": "spacing",
+      "--page-pad-x": "spacing",
+      "--page-pad-y": "spacing",
+      "--measure": "spacing",
+      "--radius-none": "radius",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-pill": "radius",
+      "--border-width": "spacing",
+      "--border-top-accent": "spacing",
+      "--shadow-mark": "shadow",
+      "--shadow-soft": "shadow",
+      "--ellipse-glow": "other"
+    },
+    "fontFamilies": [
+      "Hanken Grotesk"
+    ]
+  }
+}

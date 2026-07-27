@@ -1,0 +1,34 @@
+:root {
+  /* ---- Base palette (from brand guidelines) ---- */
+  --color-charcoal:   #1C1C1E; /* primary dark surface & ink */
+  --color-offblack:   #1A1A1A; /* body text on light */
+  --color-saffron:    #EF8922; /* canonical accent — matches the mark */
+  --color-gold:       #C8841A; /* deeper accent for large print fills */
+  --color-cream:      #F9F5EF; /* primary light surface (warm white) */
+  --color-stone:      #EDEDEA; /* secondary light surface */
+  --color-grey:       #737370; /* captions & meta */
+
+  /* tints / lines */
+  --color-saffron-08: rgba(239,137,34,.08);
+  --color-saffron-16: rgba(239,137,34,.16);
+  --line-on-light:    rgba(28,28,30,.14);
+  --line-on-dark:     rgba(249,245,239,.16);
+  --ink-muted-light:  #3a3a3c;                 /* secondary text on light */
+  --ink-muted-dark:   rgba(249,245,239,.72);   /* secondary text on dark */
+
+  /* ---- Semantic aliases ---- */
+  --surface-page:      var(--color-cream);
+  --surface-secondary: var(--color-stone);
+  --surface-inverse:   var(--color-charcoal);
+  --surface-card:      transparent;            /* cards are bordered, not filled */
+
+  --text-strong:   var(--color-charcoal);
+  --text-body:     var(--color-offblack);
+  --text-muted:    var(--color-grey);
+  --text-on-inverse: var(--color-cream);
+
+  --accent:        var(--color-saffron);
+  --accent-deep:   var(--color-gold);
+  --border:        var(--line-on-light);
+  --border-inverse:var(--line-on-dark);
+}
