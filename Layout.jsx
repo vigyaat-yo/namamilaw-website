@@ -47,7 +47,7 @@ function Ellipse({ pos = 'tr' }) {
 /* Large, faint brand-mark watermark — decorative, reinforces the mark without stock imagery. */
 function MarkWatermark({ side = 'right' }) {
   return (
-    <img src="../assets/mark-saffron.png" alt="" aria-hidden="true" style={{
+    <img src="assets/mark-saffron.png" alt="" aria-hidden="true" style={{
       position: 'absolute', [side]: 'clamp(-140px,-6vw,-40px)', top: '50%', transform: 'translateY(-50%)',
       width: 'clamp(340px,32vw,560px)', opacity: .05, pointerEvents: 'none', zIndex: 0,
     }} />
@@ -200,7 +200,7 @@ function Sidebar({ active }) {
       {/* Mobile top bar */}
       <div className="nm-mobile-bar">
         <a href="index.html" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="../assets/wordmark-reversed.png" alt="Namami Law Offices" style={{ height: 26 }} />
+          <img src="assets/wordmark-reversed.png" alt="Namami Law Offices" style={{ height: 26 }} />
         </a>
         <button aria-label="Menu" onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none',
           color: 'var(--color-cream)', fontSize: '1.6rem', cursor: 'pointer', lineHeight: 1 }}>
@@ -218,7 +218,7 @@ function Sidebar({ active }) {
           <a href="index.html" style={{ display: 'block', transition: 'opacity .2s' }}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = '.82'; }}
             onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}>
-            <img src="../assets/wordmark-reversed.png" alt="Namami Law Offices"
+            <img src="assets/wordmark-reversed.png" alt="Namami Law Offices"
               style={{ width: 200, display: 'block', marginBottom: 6 }} />
           </a>
           <div style={{ fontSize: '.62rem', letterSpacing: '.28em', textTransform: 'uppercase',
@@ -248,7 +248,7 @@ function Footer({ onDisclaimer }) {
       padding: '54px 7vw 40px' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 32 }}>
         <div>
-          <img src="../assets/wordmark-reversed.png" alt="Namami" style={{ width: 170, marginBottom: 14 }} />
+          <img src="assets/wordmark-reversed.png" alt="Namami" style={{ width: 170, marginBottom: 14 }} />
           <p style={{ fontSize: '.82rem', fontWeight: 300, lineHeight: 1.7, margin: 0 }}>
             Namami Law Offices LLP<br />S 210, Atlantic Plaza, Mayur Vihar,<br />New Delhi 110091<br />
             <a href="mailto:namaste@namamilaw.com" style={{ color: 'var(--color-saffron)', textDecoration: 'none' }}>namaste@namamilaw.com</a>
