@@ -33,22 +33,6 @@ This keeps the site trivially easy to host and edit (any text editor, no toolcha
 | `design_handoff_namami_website/` | Original design handoff — design tokens and source files from the design tool. Reference only. |
 | `.nojekyll` | Tells GitHub Pages to serve the site as-is, without running it through Jekyll. |
 
-## Running locally
-
-Any static file server works — the site has no server-side logic.
-
-```bash
-python3 -m http.server 8080
-# then open http://localhost:8080/index.html
-```
-
-or, with Node:
-
-```bash
-npx serve .
-```
-
-Opening `index.html` directly via `file://` will **not** work — the browser blocks the module-style script loading over the `file://` protocol, and the JSX scripts need to resolve relative paths (`data.js`, `Layout.jsx`) via HTTP.
 
 ## Editing content
 
