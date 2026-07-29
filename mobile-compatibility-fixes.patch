@@ -1,0 +1,79 @@
+diff --git a/Layout.jsx b/Layout.jsx
+index 2345e3e..f035584 100644
+--- a/Layout.jsx
++++ b/Layout.jsx
+@@ -203,7 +203,9 @@ function Sidebar({ active }) {
+           <img src="assets/wordmark-reversed.png" alt="Namami Law Offices" style={{ height: 26 }} />
+         </a>
+         <button aria-label="Menu" onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none',
+-          color: 'var(--color-cream)', fontSize: '1.6rem', cursor: 'pointer', lineHeight: 1 }}>
++          color: 'var(--color-cream)', fontSize: '1.6rem', cursor: 'pointer', lineHeight: 1,
++          width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
++          margin: '0 -10px 0 0', padding: 0 }}>
+           {open ? '×' : '☰'}
+         </button>
+       </div>
+@@ -336,7 +338,7 @@ function Shell({ active, children }) {
+   }, []);
+   const ack = () => { sessionStorage.setItem('nm-disclaimer-ack', '1'); setShowDisclaimer(false); };
+   return (
+-    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
++    <div className="nm-shell" style={{ display: 'flex' }}>
+       <Curtain />
+       <Cursor />
+       <CornerMarks />
+diff --git a/contact.html b/contact.html
+index dc7ee22..30d93f5 100644
+--- a/contact.html
++++ b/contact.html
+@@ -16,7 +16,7 @@
+ <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+ <style>
+-  .nm-field-select{ font-family: var(--font-grotesk); font-size: .96rem; padding: 0 0 8px; width: 100%;
++  .nm-field-select{ font-family: var(--font-grotesk); font-size: 1rem; padding: 0 0 8px; width: 100%;
+     border: none; border-bottom: 1px solid var(--line-on-light); background: transparent; color: var(--color-charcoal); }
+   .nm-field-select:focus{ outline: none; border-color: var(--color-saffron); }
+ </style>
+@@ -100,7 +100,7 @@ function Page() {
+               <div style={{ fontSize: '.72rem', letterSpacing: '.1em', textTransform: 'uppercase',
+                 fontWeight: 600, color: 'var(--color-grey)', marginBottom: 8 }}>A few details (optional)</div>
+               <textarea value={form.details} onChange={set('details')} rows={3} placeholder="Brief context for the consult"
+-                style={{ width: '100%', fontFamily: 'var(--font-grotesk)', fontSize: '.96rem', padding: '10px 0',
++                style={{ width: '100%', fontFamily: 'var(--font-grotesk)', fontSize: '1rem', padding: '10px 0',
+                   border: 'none', borderBottom: '1px solid var(--line-on-light)', background: 'transparent',
+                   color: 'var(--color-charcoal)', resize: 'vertical', boxSizing: 'border-box' }} />
+             </div>
+diff --git a/insights.html b/insights.html
+index 951baf1..03551ff 100644
+--- a/insights.html
++++ b/insights.html
+@@ -23,6 +23,10 @@
+     border: 1px solid var(--line-on-light); border-radius: var(--radius-sm); background: var(--color-cream);
+     color: var(--color-charcoal); width: 100%; }
+   .nm-search:focus, .nm-select:focus{ outline: none; border-color: var(--color-saffron); }
++  @media (max-width: 880px){
++    /* iOS Safari zooms the page in on focus of any field under 16px — bump to 16px on mobile only. */
++    .nm-search, .nm-select{ font-size: 1rem; }
++  }
+ </style>
+ </head>
+ <body>
+diff --git a/site.css b/site.css
+index d690189..cd79644 100644
+--- a/site.css
++++ b/site.css
+@@ -86,9 +86,12 @@ body::after{
+   align-items:center; justify-content:space-between;
+ }
+ 
++.nm-shell{ align-items:flex-start; }
++
+ @media (max-width: 880px){
++  .nm-shell{ flex-direction:column; align-items:stretch; }
+   .nm-sidebar{ display:none !important; }
+-  .nm-mobile-bar{ display:flex; }
++  .nm-mobile-bar{ display:flex; width:100%; box-sizing:border-box; }
+ }
+ @media (min-width: 881px){
+   .nm-mobile-drawer{ display:none !important; }

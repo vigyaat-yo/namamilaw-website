@@ -203,7 +203,9 @@ function Sidebar({ active }) {
           <img src="assets/wordmark-reversed.png" alt="Namami Law Offices" style={{ height: 26 }} />
         </a>
         <button aria-label="Menu" onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none',
-          color: 'var(--color-cream)', fontSize: '1.6rem', cursor: 'pointer', lineHeight: 1 }}>
+          color: 'var(--color-cream)', fontSize: '1.6rem', cursor: 'pointer', lineHeight: 1,
+          width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          margin: '0 -10px 0 0', padding: 0 }}>
           {open ? '×' : '☰'}
         </button>
       </div>
@@ -336,7 +338,7 @@ function Shell({ active, children }) {
   }, []);
   const ack = () => { sessionStorage.setItem('nm-disclaimer-ack', '1'); setShowDisclaimer(false); };
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+    <div className="nm-shell" style={{ display: 'flex' }}>
       <Curtain />
       <Cursor />
       <CornerMarks />

@@ -23,6 +23,10 @@
     border: 1px solid var(--line-on-light); border-radius: var(--radius-sm); background: var(--color-cream);
     color: var(--color-charcoal); width: 100%; }
   .nm-search:focus, .nm-select:focus{ outline: none; border-color: var(--color-saffron); }
+  @media (max-width: 880px){
+    /* iOS Safari zooms the page in on focus of any field under 16px — bump to 16px on mobile only. */
+    .nm-search, .nm-select{ font-size: 1rem; }
+  }
 </style>
 </head>
 <body>
